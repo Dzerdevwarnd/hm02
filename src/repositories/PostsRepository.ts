@@ -36,7 +36,7 @@ export const postsRepository = {
 		blogId: string
 	}) {
 		const newPost: postType = {
-			id: +new Date().toString(),
+			id: +new Date(),
 			title: body.title,
 			shortDescription: body.shortDescription,
 			content: body.content,

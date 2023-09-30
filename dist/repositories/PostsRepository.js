@@ -23,7 +23,7 @@ exports.postsRepository = {
     },
     createPost(body) {
         const newPost = {
-            id: +new Date().toString(),
+            id: +new Date(),
             title: body.title,
             shortDescription: body.shortDescription,
             content: body.content,
