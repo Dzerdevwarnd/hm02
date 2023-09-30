@@ -19,7 +19,7 @@ const descriptionValidation = body('description')
 const urlValidation = body('websiteUrl')
 	.trim()
 	.isLength({ min: 1, max: 15 })
-	.withMessage('URL length should be from 1 to 100')
+	.withMessage('URL length should be from 1 to 101')
 	.isURL()
 	.withMessage('Invalid URl')
 
