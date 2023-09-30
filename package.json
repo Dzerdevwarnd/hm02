@@ -16,13 +16,15 @@
 	"scripts": {
 		"dev": "yarn nodemon --inspect dist/index.js",
 		"watch": "tsc -w",
-		"jest": "jest"
+		"jest": "jest -i"
 	},
 	"devDependencies": {
 		"@types/express": "^4.17.18",
-		"@types/node": "^20.7.0",
+		"@types/node": "^20.8.0",
 		"nodemon": "^3.0.1",
 		"ts-node": "^10.9.1",
 		"typescript": "^5.2.2"
-	}
+	},
+	"repository": "https://github.com/Dzerdevwarnd/hm02.git",
+	"author": "Warnd <dzerdevwarnd@gmail.com>"
 }
