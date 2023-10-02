@@ -41,7 +41,7 @@ exports.postsRepository = {
             post.title = body.title;
             post.shortDescription = body.shortDescription;
             post.content = body.content;
-            post.blogName = body.blogId;
+            post.blogId = body.blogId;
             return post;
         }
     },

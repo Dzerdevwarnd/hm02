@@ -16,7 +16,7 @@ const titleValidation = body('title')
 const shortDescriptionValidation = body('shortDescription')
 	.trim()
 	.isLength({ min: 1, max: 100 })
-	.withMessage('shortDescription length should be from 1 to 100')
+	.withMessage('shortDescription length should be from 1 to 100').isEmpty
 const contentValidation = body('content')
 	.trim()
 	.isLength({ min: 1, max: 1000 })

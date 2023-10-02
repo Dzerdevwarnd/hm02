@@ -16,8 +16,8 @@ const descriptionValidation = (0, express_validator_1.body)('description')
     .withMessage('Description length should be from 1 to 500');
 const urlValidation = (0, express_validator_1.body)('websiteUrl')
     .trim()
-    .isLength({ min: 1, max: 15 })
-    .withMessage('URL length should be from 1 to 100')
+    .isLength({ min: 1, max: 100 })
+    .withMessage('URL length should be from 1 to 101')
     .isURL()
     .withMessage('Invalid URl');
 exports.blogsRouter = (0, express_1.Router)({});

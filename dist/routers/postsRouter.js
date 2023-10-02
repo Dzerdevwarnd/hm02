@@ -14,7 +14,7 @@ const titleValidation = (0, express_validator_1.body)('title')
 const shortDescriptionValidation = (0, express_validator_1.body)('shortDescription')
     .trim()
     .isLength({ min: 1, max: 100 })
-    .withMessage('shortDescription length should be from 1 to 100');
+    .withMessage('shortDescription length should be from 1 to 100').isEmpty;
 const contentValidation = (0, express_validator_1.body)('content')
     .trim()
     .isLength({ min: 1, max: 1000 })
