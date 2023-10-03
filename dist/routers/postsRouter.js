@@ -19,10 +19,11 @@ const contentValidation = (0, express_validator_1.body)('content')
     .trim()
     .isLength({ min: 1, max: 1000 })
     .withMessage('Content length should be from 1 to 1000');
-const blogIdValidation = (0, express_validator_1.body)('BlogId')
+const blogIdValidation = (0, express_validator_1.body)('blogId')
+    .isString()
     .trim()
-    .isLength({ min: 1, max: 50 })
-    .withMessage('blogId length should be from 1 to 50');
+    .isLength({ min: 1, max: 100 })
+    .withMessage('blogId length should be from 1 to 100');
 exports.postsRouter.get('/', (req, res) => {
     res.status(200).send(PostsRepository_1.posts);
 });
