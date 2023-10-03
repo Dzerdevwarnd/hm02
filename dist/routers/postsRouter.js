@@ -21,8 +21,8 @@ const contentValidation = (0, express_validator_1.body)('content')
     .withMessage('Content length should be from 1 to 1000');
 const blogIdValidation = (0, express_validator_1.body)('BlogId')
     .trim()
-    .isLength({ min: 1, max: 500 })
-    .withMessage('blogId length should be from 1 to 500');
+    .isLength({ min: 1, max: 50 })
+    .withMessage('blogId length should be from 1 to 50');
 exports.postsRouter.get('/', (req, res) => {
     res.status(200).send(PostsRepository_1.posts);
 });
