@@ -7,7 +7,7 @@ export const inputValidationMiddleware = (
 	next: NextFunction
 ) => {
 	const errors = validationResult(req).array({ onlyFirstError: true })
-	if (errors) {
+	if (errors.length > 0) {
 		let errorsMessages = []
 		for (let i = 0; i < errors.length; i++) {
 			let errorResponse = { message: '', field: '' }
