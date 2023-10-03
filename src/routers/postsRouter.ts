@@ -23,8 +23,8 @@ const contentValidation = body('content')
 	.withMessage('Content length should be from 1 to 1000')
 const blogIdValidation = body('BlogId')
 	.trim()
-	.isLength({ min: 1, max: 500 })
-	.withMessage('blogId length should be from 1 to 500')
+	.isLength({ min: 1, max: 3 })
+	.withMessage('blogId length should be from 1 to 3')
 
 postsRouter.get('/', (req: Request, res: Response): void => {
 	res.status(200).send(posts)
