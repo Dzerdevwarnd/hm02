@@ -6,14 +6,14 @@ export const inputValidationMiddleware = (
 	res: Response,
 	next: NextFunction
 ) => {
-	const errors = validationResult(req)
-	if (!errors.isEmpty()) {
+	const errors = validationResult(req).array({ onlyFirstError: true })
+	if (errors) {
 		let errorsMessages = []
-		for (let i = 0; i < errors.array().length; i++) {
+		for (let i = 0; i < errors.length; i++) {
 			let errorResponse = { message: '', field: '' }
-			errorResponse.message = errors.array()[i].msg
+			errorResponse.message = errors[i].msg
 			//@ts-ignore
-			errorResponse.field = errors.array()[i].path
+			errorResponse.field = errors[i].path
 			errorsMessages.push(errorResponse)
 		}
 		res.status(400).json({ errorsMessages })
