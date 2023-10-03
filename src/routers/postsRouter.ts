@@ -24,7 +24,7 @@ const contentValidation = body('content')
 const blogIdValidation = body('BlogId')
 	.trim()
 	.isLength({ min: 1, max: 500 })
-	.withMessage('blogId length should be from 1 to 50')
+	.withMessage('blogId length should be from 1 to 500')
 
 postsRouter.get('/', (req: Request, res: Response): void => {
 	res.status(200).send(posts)
