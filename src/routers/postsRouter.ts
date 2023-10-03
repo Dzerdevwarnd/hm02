@@ -3,9 +3,17 @@ import { body } from 'express-validator'
 import { basicAuthMiddleware } from '../middleware/authMiddleware'
 import { inputValidationMiddleware } from '../middleware/inputValidationMiddleware'
 import { posts, postsRepository } from '../repositories/PostsRepository'
+import { blogs } from '../repositories/blogsRepository'
 type RequestWithParams<P> = Request<P, {}, {}, {}>
 type RequestWithBody<B> = Request<{}, {}, B, {}>
 type RequestWithParamsAndBody<P, B> = Request<P, {}, B>
+
+type blogType = {
+	id: string
+	name: string
+	description: string
+	websiteUrl: string
+}
 
 export const postsRouter = Router({})
 
@@ -27,6 +35,13 @@ const blogIdValidation = body('blogId')
 	.isLength({ min: 1, max: 100 })
 	.withMessage('blogId length should be from 1 to 100')
 
+const blogIdExistValidation = body('blogId').custom(async (value, { req }) => {
+	const blogId = blogs.find((blog): boolean => blog.id === value)?.id
+	if (!blogId) {
+		throw new Error('Blog id does not exist')
+	}
+})
+
 postsRouter.get('/', (req: Request, res: Response): void => {
 	res.status(200).send(posts)
 })
@@ -47,6 +62,7 @@ postsRouter.get(
 postsRouter.post(
 	'/',
 	basicAuthMiddleware,
+	blogIdExistValidation,
 	titleValidation,
 	shortDescriptionValidation,
 	contentValidation,
