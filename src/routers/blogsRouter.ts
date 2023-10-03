@@ -36,9 +36,9 @@ blogsRouter.get(
 		if (!foundBlog) {
 			res.sendStatus(404)
 			return
-		} else {
-			res.status(200).send(foundBlog)
 		}
+		res.status(200).send(foundBlog)
+		return
 	}
 )
 

@@ -8,15 +8,15 @@ export const inputValidationMiddleware = (
 ) => {
 	const errors = validationResult(req)
 	if (!errors.isEmpty()) {
-		let errorMessages = []
+		let errorsMessages = []
 		for (let i = 0; i < errors.array().length; i++) {
 			let errorResponse = { message: '', field: '' }
 			errorResponse.message = errors.array()[i].msg
 			//@ts-ignore
 			errorResponse.field = errors.array()[i].path
-			errorMessages.push(errorResponse)
+			errorsMessages.push(errorResponse)
 		}
-		res.status(400).json({ errorMessages })
+		res.status(400).json({ errorsMessages })
 	} else {
 		next()
 	}
