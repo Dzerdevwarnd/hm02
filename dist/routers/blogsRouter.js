@@ -30,9 +30,8 @@ exports.blogsRouter.get('/:id', (req, res) => {
         res.sendStatus(404);
         return;
     }
-    else {
-        res.status(200).send(foundBlog);
-    }
+    res.status(200).send(foundBlog);
+    return;
 });
 exports.blogsRouter.post('/', authMiddleware_1.basicAuthMiddleware, nameValidation, descriptionValidation, urlValidation, inputValidationMiddleware_1.inputValidationMiddleware, (req, res) => {
     const newBlog = blogsRepository_1.blogsRepository.createBlog(req.body);
