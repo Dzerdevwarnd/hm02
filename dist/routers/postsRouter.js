@@ -14,20 +14,20 @@ const titleValidation = (0, express_validator_1.body)('title')
 const shortDescriptionValidation = (0, express_validator_1.body)('shortDescription')
     .trim()
     .isLength({ min: 1, max: 100 })
-    .withMessage('shortDescription length should be from 1 to 100').isEmpty;
+    .withMessage('shortDescription length should be from 1 to 100');
 const contentValidation = (0, express_validator_1.body)('content')
     .trim()
     .isLength({ min: 1, max: 1000 })
     .withMessage('Content length should be from 1 to 1000');
 const blogIdValidation = (0, express_validator_1.body)('BlogId')
     .trim()
-    .isLength({ min: 1, max: 50 })
+    .isLength({ min: 0, max: 50 })
     .withMessage('blogId length should be from 1 to 50');
 exports.postsRouter.get('/', (req, res) => {
     res.status(200).send(PostsRepository_1.posts);
 });
 exports.postsRouter.get('/:id', (req, res) => {
-    const foundPost = PostsRepository_1.postsRepository.findPost(+req.params.id);
+    const foundPost = PostsRepository_1.postsRepository.findPost(req.params.id);
     if (!foundPost) {
         res.sendStatus(404);
         return;
@@ -36,12 +36,12 @@ exports.postsRouter.get('/:id', (req, res) => {
         res.status(200).send(foundPost);
     }
 });
-exports.postsRouter.post('/', authMiddleware_1.basicAuthMiddleware, titleValidation, shortDescriptionValidation, inputValidationMiddleware_1.inputValidationMiddleware, (req, res) => {
+exports.postsRouter.post('/', authMiddleware_1.basicAuthMiddleware, titleValidation, shortDescriptionValidation, contentValidation, blogIdValidation, inputValidationMiddleware_1.inputValidationMiddleware, (req, res) => {
     const newPost = PostsRepository_1.postsRepository.createPost(req.body);
     PostsRepository_1.posts.push(newPost);
     res.status(201).send(newPost);
 });
-exports.postsRouter.put('/:id', authMiddleware_1.basicAuthMiddleware, titleValidation, shortDescriptionValidation, inputValidationMiddleware_1.inputValidationMiddleware, (req, res) => {
+exports.postsRouter.put('/:id', authMiddleware_1.basicAuthMiddleware, titleValidation, shortDescriptionValidation, contentValidation, blogIdValidation, inputValidationMiddleware_1.inputValidationMiddleware, (req, res) => {
     const updatePost = PostsRepository_1.postsRepository.updatePost(req.params.id, req.body);
     if (!updatePost) {
         res.sendStatus(404);

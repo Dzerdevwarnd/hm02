@@ -1,5 +1,5 @@
 type postType = {
-	id: number
+	id: string
 	title: string
 	shortDescription: string
 	content: string
@@ -9,7 +9,7 @@ type postType = {
 
 export const posts: postType[] = [
 	{
-		id: 1,
+		id: '1',
 		title: 'test title',
 		shortDescription: 'test short description',
 		content: 'test content',
@@ -19,9 +19,9 @@ export const posts: postType[] = [
 ]
 
 export const postsRepository = {
-	findPost(id: number | null) {
+	findPost(id: string | null) {
 		let post: postType | undefined = posts.find(
-			(post): Boolean => +post.id === id
+			(post): Boolean => post.id === id
 		)
 		if (post) {
 			return post
@@ -36,7 +36,7 @@ export const postsRepository = {
 		blogId: string
 	}) {
 		const newPost: postType = {
-			id: +new Date(),
+			id: String(Date.now()),
 			title: body.title,
 			shortDescription: body.shortDescription,
 			content: body.content,
@@ -55,7 +55,7 @@ export const postsRepository = {
 		}
 	) {
 		let post: postType | undefined = posts.find(
-			(post): Boolean => post.id === +id
+			(post): Boolean => post.id === id
 		)
 		if (!post) {
 			return
@@ -70,7 +70,7 @@ export const postsRepository = {
 	findIndexPost(params: { id: string }) {
 		const id = params.id
 		const indexPost: number | undefined = posts.findIndex(
-			(post): Boolean => post.id === +id
+			(post): Boolean => post.id === id
 		)
 		return indexPost
 	},

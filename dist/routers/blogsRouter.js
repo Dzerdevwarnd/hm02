@@ -25,7 +25,7 @@ exports.blogsRouter.get('/', (req, res) => {
     res.status(200).send(blogsRepository_1.blogs);
 });
 exports.blogsRouter.get('/:id', (req, res) => {
-    const foundBlog = blogsRepository_1.blogsRepository.findBlog(+req.params.id);
+    const foundBlog = blogsRepository_1.blogsRepository.findBlog(req.params.id);
     if (!foundBlog) {
         res.sendStatus(404);
         return;

@@ -32,7 +32,7 @@ blogsRouter.get('/', (req: Request, res: Response): void => {
 blogsRouter.get(
 	'/:id',
 	(req: RequestWithParams<{ id: string }>, res: Response): void => {
-		const foundBlog = blogsRepository.findBlog(+req.params.id)
+		const foundBlog = blogsRepository.findBlog(req.params.id)
 		if (!foundBlog) {
 			res.sendStatus(404)
 			return

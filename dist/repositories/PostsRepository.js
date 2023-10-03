@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.postsRepository = exports.posts = void 0;
 exports.posts = [
     {
-        id: 1,
+        id: '1',
         title: 'test title',
         shortDescription: 'test short description',
         content: 'test content',
@@ -13,7 +13,7 @@ exports.posts = [
 ];
 exports.postsRepository = {
     findPost(id) {
-        let post = exports.posts.find((post) => +post.id === id);
+        let post = exports.posts.find((post) => post.id === id);
         if (post) {
             return post;
         }
@@ -23,7 +23,7 @@ exports.postsRepository = {
     },
     createPost(body) {
         const newPost = {
-            id: +new Date(),
+            id: String(Date.now()),
             title: body.title,
             shortDescription: body.shortDescription,
             content: body.content,
@@ -33,7 +33,7 @@ exports.postsRepository = {
         return newPost;
     },
     updatePost(id, body) {
-        let post = exports.posts.find((post) => post.id === +id);
+        let post = exports.posts.find((post) => post.id === id);
         if (!post) {
             return;
         }
@@ -47,7 +47,7 @@ exports.postsRepository = {
     },
     findIndexPost(params) {
         const id = params.id;
-        const indexPost = exports.posts.findIndex((post) => post.id === +id);
+        const indexPost = exports.posts.findIndex((post) => post.id === id);
         return indexPost;
     },
 };

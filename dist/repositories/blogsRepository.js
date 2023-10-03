@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.blogsRepository = exports.blogs = void 0;
 exports.blogs = [
     {
-        id: 1,
+        id: '1',
         name: 'test',
         description: 'testBlog',
         websiteUrl: 'Cucumber.org',
@@ -21,7 +21,7 @@ exports.blogsRepository = {
     },
     createBlog(body) {
         const newBlog = {
-            id: +new Date(),
+            id: String(Date.now()),
             name: body.name,
             description: body.description,
             websiteUrl: body.websiteUrl,
@@ -29,7 +29,7 @@ exports.blogsRepository = {
         return newBlog;
     },
     updateBlog(id, body) {
-        let blog = exports.blogs.find((blog) => blog.id === +id);
+        let blog = exports.blogs.find((blog) => blog.id === id);
         if (!blog) {
             return;
         }
@@ -41,7 +41,7 @@ exports.blogsRepository = {
         }
     },
     findIndexBlog(params) {
-        const id = +params.id;
+        const id = params.id;
         const indexBlog = exports.blogs.findIndex((blog) => blog.id === id);
         return indexBlog;
     },

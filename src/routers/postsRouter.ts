@@ -16,14 +16,14 @@ const titleValidation = body('title')
 const shortDescriptionValidation = body('shortDescription')
 	.trim()
 	.isLength({ min: 1, max: 100 })
-	.withMessage('shortDescription length should be from 1 to 100').isEmpty
+	.withMessage('shortDescription length should be from 1 to 100')
 const contentValidation = body('content')
 	.trim()
 	.isLength({ min: 1, max: 1000 })
 	.withMessage('Content length should be from 1 to 1000')
 const blogIdValidation = body('BlogId')
 	.trim()
-	.isLength({ min: 1, max: 50 })
+	.isLength({ min: 0, max: 50 })
 	.withMessage('blogId length should be from 1 to 50')
 
 postsRouter.get('/', (req: Request, res: Response): void => {
@@ -33,7 +33,7 @@ postsRouter.get('/', (req: Request, res: Response): void => {
 postsRouter.get(
 	'/:id',
 	(req: RequestWithParams<{ id: string }>, res: Response): void => {
-		const foundPost = postsRepository.findPost(+req.params.id)
+		const foundPost = postsRepository.findPost(req.params.id)
 		if (!foundPost) {
 			res.sendStatus(404)
 			return
@@ -48,6 +48,8 @@ postsRouter.post(
 	basicAuthMiddleware,
 	titleValidation,
 	shortDescriptionValidation,
+	contentValidation,
+	blogIdValidation,
 	inputValidationMiddleware,
 	(
 		req: RequestWithBody<{
@@ -69,6 +71,8 @@ postsRouter.put(
 	basicAuthMiddleware,
 	titleValidation,
 	shortDescriptionValidation,
+	contentValidation,
+	blogIdValidation,
 	inputValidationMiddleware,
 	(
 		req: RequestWithParamsAndBody<
