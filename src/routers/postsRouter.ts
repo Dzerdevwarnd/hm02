@@ -86,6 +86,7 @@ postsRouter.post(
 postsRouter.put(
 	'/:id',
 	basicAuthMiddleware,
+	blogIdExistValidation,
 	titleValidation,
 	shortDescriptionValidation,
 	contentValidation,
